@@ -30,6 +30,15 @@
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div><br />
+    			@endif
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -38,40 +47,40 @@
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputEmail1">Name</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+				<label for="Name">Name</label>
+				<input type="email" class="form-control" id="name" name=name" placeholder="Enter name">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Birth Date</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="Birth Date">Birth Date</label>
+				<input type="text" class="form-control" id="birth_date" name="birth_date" placeholder="Birth Date">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Designation</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="designation">Designation</label>
+				<input type="text" class="form-control" id="designation" name="designation" placeholder="Designation">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputEmail1">Office</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+				<label for="Office">Office</label>
+				<input type="text" class="form-control" id="Office" name="Office" placeholder="Enter office">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Mobile No</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="Mobile No">Mobile No</label>
+				<input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Moblie No">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Email Id</label>
-				<input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="Email Id">Email Id</label>
+				<input type="email" class="form-control"  name="emails" id="email" placeholder="email">
 				</div>
 			</div>
 		</div>
@@ -79,20 +88,30 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="exampleInputEmail1">Maratial Status</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-				</div>
+				<select id="maratial_status" name="maratial_status" class="form-control select2">
+					<option value="">--Select--</option>
+					<option value="M">Married</option>
+					<option value="U">Unmarride</option> 	
+				 </select>
+				 </div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="exampleInputPassword1">Is Head of The Department ?</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				</div>
+				<select id="is_dept_head" name="is_dept_head" class="form-control select2">
+					<option value="">--Select--</option>
+					<option value="Y">હા</option>
+					<option value="N">ના</option>	
+				 </select>	</div>
 			</div>
 			<div class="col-4">
-				<div class="form-group">
+				<div class="form-group"> 
 				<label for="exampleInputPassword1">Is Transferable Job ?</label>
-				<input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				</div>
+				<select id="is_transferable" name="is_transferable" class="form-control select2">
+					<option value="">--Select--</option>
+					<option value="Y">હા</option>
+					<option value="N">ના</option>	
+				 </select></div>
 			</div>
 		</div>
 		<div class="row">
