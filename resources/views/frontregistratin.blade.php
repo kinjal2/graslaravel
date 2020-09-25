@@ -42,19 +42,30 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-<form role="form">
+			  <form method="POST" action="{{ url('profiledetails') }}">
+@csrf
 	<div class="card-body">
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Name">Name</label>
-				<input type="email" class="form-control" id="name" name=name" placeholder="Enter name">
+				<input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter name">
+				@error('name')
+                 <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                 @enderror
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Birth Date">Birth Date</label>
-				<input type="text" class="form-control" id="birth_date" name="birth_date" placeholder="Birth Date">
+				<div class="input-group date" id="date_of_birth" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#date_of_birth"/>
+                        <div class="input-group-append" data-target="#date_of_birth" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>	
 				</div>
 			</div>
 			<div class="col-4">
@@ -68,19 +79,19 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Office">Office</label>
-				<input type="text" class="form-control" id="Office" name="Office" placeholder="Enter office">
+				<input type="text" class="form-control" id="office" name="office" placeholder="Enter office">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Mobile No">Mobile No</label>
-				<input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Moblie No">
+				<input type="text" class="form-control" id="contact_no" name="contact_no" placeholder="Moblie No">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Email Id">Email Id</label>
-				<input type="email" class="form-control"  name="emails" id="email" placeholder="email">
+				<input type="email" class="form-control"  name="email_id" id="email_id" placeholder="email">
 				</div>
 			</div>
 		</div>
@@ -118,79 +129,89 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="exampleInputEmail1">Original Date of Appointment in Govt</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+				<div class="input-group date" id="appointment_date" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#appointment_date"/>
+                        <div class="input-group-append" data-target="#appointment_date" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>	
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="exampleInputPassword1">Retirement Date</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<div class="input-group date" id="date_of_retirement" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#date_of_retirement"/>
+                        <div class="input-group-append" data-target="#date_of_retirement" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>	
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Salary Slab as per 7th Pay comm.</label>
-				<input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				</div>
-			</div>
-		</div>
-			<div class="row">
-			<div class="col-4">
-				<div class="form-group">
-				<label for="exampleInputEmail1">Matrix Pay Level in 7th Pay</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="form-group">
-				<label for="exampleInputPassword1">Actual Salary (basic salary as per 7th pay)</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="form-group">
-				<label for="exampleInputPassword1">Basic Pay(As per 7th pay commission)</label>
-				<input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="salary_slab">Salary Slab as per 7th Pay comm.</label>
+				<input type="text" class="form-control" id="salary_slab" name="salary_slab "placeholder="salary- slab">
 				</div>
 			</div>
 		</div>
 			<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputEmail1">Native Address</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+				<label for="grade_pay">Matrix Pay Level in 7th Pay</label>
+				<input type="text" class="form-control" id="grade_pay"  name="grade_pay" placeholder="Enter grade pay">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Current Address</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="actual_salary">Actual Salary (basic salary as per 7th pay)</label>
+				<input type="text" class="form-control" name="actual_salary" id="actual_salary" placeholder="actual salary">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Office Address</label>
-				<input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="basic_pay">Basic Pay(As per 7th pay commission)</label>
+				<input type="text" class="form-control" id="basic_pay" name="basic_pay" placeholder="Password">
+				</div>
+			</div>
+		</div>
+			<div class="row">
+			<div class="col-4">
+				<div class="form-group">
+				<label for="Address">Native Address</label>
+				<input type="text" class="form-control" id="Address" name="Address" placeholder="Enter address">
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+				<label for="current_address">Current Address</label>
+				<input type="text" class="form-control" id="current_address" name="current_address" placeholder="Enter Current address">
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+				<label for="office_phone">Office Phone</label>
+				<input type="text" class="form-control" id="office_phone" placeholder="Enter Office Phone" name="office_phone">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputEmail1">Office Phone</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+				<label for="office_address">Office Address</label>
+				<input type="text" class="form-control" id="office_address" name="office_address" placeholder="Enter Office Address">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">GPF/NPS No.</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="gpfnumber">GPF/NPS No.</label>
+				<input type="text" class="form-control" id="gpfnumber" placeholder="Enter GPF Number">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Panno</label>
-				<input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="gpfnumber">Panno</label>
+				<input type="text" class="form-control" id="pancard" placeholder="enter pan no">
 				</div>
 			</div>
 		</div>
@@ -211,13 +232,6 @@
 <!-- ./wrapper -->
 <!-- Footer -->
 @include('footer')
-<!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<script src="{{ asset('/bower_components/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('/bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('/bower_components/admin-lte/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>

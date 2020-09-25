@@ -25,3 +25,7 @@ Route::post('create', 'AuthController@create');
 Route::get('home', 'HomeController@index'); 
 Route::post('reset_password_without_token', 'AuthController@validatePasswordRequest');
 Route::get('forgotpassword', 'AuthController@forgotpassword');
+
+
+
+Route::post('/profiledetails', 'HomeController@updateprofiledetails');
