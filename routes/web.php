@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('admin', function () {
     return view('admin_template');
 });
@@ -29,3 +30,10 @@ Route::get('forgotpassword', 'AuthController@forgotpassword');
 
 
 Route::post('/profiledetails', 'HomeController@updateprofiledetails');
+Route::get('/gras/useropration', 'HomeController@updateprofiledetails');
+
+//Route::get('/quarter-list', 'HomeController@getData');
+//Route::get('homedata', [
+    //'uses' => 'HomeController@getData',
+   // 'as' => 'quarter-list'
+//]); //for datatable

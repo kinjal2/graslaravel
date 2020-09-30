@@ -42,14 +42,14 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-			  <form method="POST" action="{{ url('profiledetails') }}">
+			  <form method="POST" action="{{ url('profiledetails, app()->getLocale())') }}" enctype="multipart/form-data">
 @csrf
 	<div class="card-body">
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Name">Name</label>
-				<input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter name">
+				<input type="text" value="{{isset($users->name)?$users->name:''}}" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter name">
 				@error('name')
                  <span class="invalid-feedback" role="alert">
                      <strong>{{ $message }}</strong>
@@ -60,8 +60,8 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Birth Date">Birth Date</label>
-				<div class="input-group date" id="date_of_birth" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#date_of_birth"/>
+				<div class="input-group date dateformat" id="date_of_birth" data-target-input="nearest">
+                        <input type="text" value="{{isset($users->date_of_birth)?$users->date_of_birth:''}}" name="date_of_birth" class="form-control datetimepicker-input " data-target="#date_of_birth" readonly/>
                         <div class="input-group-append" data-target="#date_of_birth" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -71,7 +71,7 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="designation">Designation</label>
-				<input type="text" class="form-control" id="designation" name="designation" placeholder="Designation">
+				<input type="text" value="{{isset($users->designation)?$users->designation:''}}" class="form-control" id="designation" name="designation" placeholder="Designation">
 				</div>
 			</div>
 		</div>
@@ -79,58 +79,48 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Office">Office</label>
-				<input type="text" class="form-control" id="office" name="office" placeholder="Enter office">
+				<input type="text" value="{{isset($users->office)?$users->office:''}}"  class="form-control" id="office" name="office" placeholder="Enter office">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Mobile No">Mobile No</label>
-				<input type="text" class="form-control" id="contact_no" name="contact_no" placeholder="Moblie No">
+				<input type="text"  value="{{isset($users->contact_no)?$users->contact_no:''}}"  class="form-control" id="contact_no" name="contact_no" placeholder="Moblie No">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Email Id">Email Id</label>
-				<input type="email" class="form-control"  name="email_id" id="email_id" placeholder="email">
+				<input type="email" value="{{isset($users->email_id)?$users->email_id:''}}"  class="form-control"  name="email_id" id="email_id" placeholder="email">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputEmail1">Maratial Status</label>
-				<select id="maratial_status" name="maratial_status" class="form-control select2">
-					<option value="">--Select--</option>
-					<option value="M">Married</option>
-					<option value="U">Unmarride</option> 	
-				 </select>
+				<label for="maratial_status">Maratial Status</label>
+				{{ Form::select('maratial_status',getMaratialstatus(),'isset($users->maratial_status)?$users->maratial_status:" "',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+			
 				 </div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Is Head of The Department ?</label>
-				<select id="is_dept_head" name="is_dept_head" class="form-control select2">
-					<option value="">--Select--</option>
-					<option value="Y">હા</option>
-					<option value="N">ના</option>	
-				 </select>	</div>
+				<label for="is_dept_head">Is Head of The Department ?</label>
+				{{ Form::select('is_dept_head',getYesNo(),'isset($users->is_dept_head)?$users->is_dept_head:" "',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+			</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group"> 
-				<label for="exampleInputPassword1">Is Transferable Job ?</label>
-				<select id="is_transferable" name="is_transferable" class="form-control select2">
-					<option value="">--Select--</option>
-					<option value="Y">હા</option>
-					<option value="N">ના</option>	
-				 </select></div>
-			</div>
+				<label for="is_transferable">Is Transferable Job ?</label> 
+		    	{{ Form::select('is_transferable',getYesNo(),'isset($users->is_transferable)?$users->is_transferable:" "',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+				</div>	</div>
 		</div>
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputEmail1">Original Date of Appointment in Govt</label>
-				<div class="input-group date" id="appointment_date" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#appointment_date"/>
+				<label for="appointment_date">Original Date of Appointment in Govt</label>
+				<div class="input-group date dateformat" id="appointment_date" data-target-input="nearest">
+                        <input type="text" value="{{isset($users->appointment_date)?$users->appointment_date:''}}" name="appointment_date"  class="form-control datetimepicker-input" data-target="#appointment_date"/>
                         <div class="input-group-append" data-target="#appointment_date" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -139,9 +129,9 @@
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-				<label for="exampleInputPassword1">Retirement Date</label>
-				<div class="input-group date" id="date_of_retirement" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#date_of_retirement"/>
+				<label for="date_of_retirement">Retirement Date</label>
+				<div class="input-group date dateformat" id="date_of_retirement" data-target-input="nearest">
+                        <input type="text" value="{{isset($users->date_of_retirement)?$users->date_of_retirement:''}}" name="date_of_retirement"  class="form-control datetimepicker-input" data-target="#date_of_retirement"/>
                         <div class="input-group-append" data-target="#date_of_retirement" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -151,7 +141,7 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="salary_slab">Salary Slab as per 7th Pay comm.</label>
-				<input type="text" class="form-control" id="salary_slab" name="salary_slab "placeholder="salary- slab">
+				<input type="text" class="form-control" value="{{isset($users->salary_slab)?$users->salary_slab:''}}" id="salary_slab" name="salary_slab"placeholder="salary- slab">
 				</div>
 			</div>
 		</div>
@@ -159,19 +149,19 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="grade_pay">Matrix Pay Level in 7th Pay</label>
-				<input type="text" class="form-control" id="grade_pay"  name="grade_pay" placeholder="Enter grade pay">
+				<input type="text" class="form-control" id="grade_pay" value="{{isset($users->grade_pay)?$users->grade_pay:''}}"  name="grade_pay" placeholder="Enter grade pay">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="actual_salary">Actual Salary (basic salary as per 7th pay)</label>
-				<input type="text" class="form-control" name="actual_salary" id="actual_salary" placeholder="actual salary">
+				<input type="text" class="form-control"   value="{{isset($users->actual_salary)?$users->actual_salary:''}}" name="actual_salary" id="actual_salary" placeholder="actual salary">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="basic_pay">Basic Pay(As per 7th pay commission)</label>
-				<input type="text" class="form-control" id="basic_pay" name="basic_pay" placeholder="Password">
+				<input type="text" class="form-control"  value="{{isset($users->basic_pay)?$users->basic_pay:''}}"  id="basic_pay" name="basic_pay" placeholder="Basic pay">
 				</div>
 			</div>
 		</div>
@@ -179,19 +169,19 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Address">Native Address</label>
-				<input type="text" class="form-control" id="Address" name="Address" placeholder="Enter address">
+				<input type="text" class="form-control" value="{{isset($users->address)?$users->address:''}}"  id="address" name="address" placeholder="Enter address">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="current_address">Current Address</label>
-				<input type="text" class="form-control" id="current_address" name="current_address" placeholder="Enter Current address">
+				<input type="text" class="form-control"  value="{{isset($users->current_address)?$users->current_address:''}}" id="current_address" name="current_address" placeholder="Enter Current address">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="office_phone">Office Phone</label>
-				<input type="text" class="form-control" id="office_phone" placeholder="Enter Office Phone" name="office_phone">
+				<input type="text" class="form-control"  value="{{isset($users->office_phone)?$users->office_phone:''}}" id="office_phone" placeholder="Enter Office Phone" name="office_phone">
 				</div>
 			</div>
 		</div>
@@ -199,22 +189,37 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="office_address">Office Address</label>
-				<input type="text" class="form-control" id="office_address" name="office_address" placeholder="Enter Office Address">
+				<input type="text" class="form-control" value="{{isset($users->office_address)?$users->office_address:''}}"  id="office_address" name="office_address" placeholder="Enter Office Address">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="gpfnumber">GPF/NPS No.</label>
-				<input type="text" class="form-control" id="gpfnumber" placeholder="Enter GPF Number">
+				<input type="text" class="form-control"  value="{{isset($users->gpfnumber)?$users->gpfnumber:''}}"  id="gpfnumber" name="gpfnumber" placeholder="Enter GPF Number">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="gpfnumber">Panno</label>
-				<input type="text" class="form-control" id="pancard" placeholder="enter pan no">
+				<input type="text" class="form-control" value="{{isset($users->pancard)?$users->pancard:''}}" id="pancard" name="pancard"placeholder="enter pan no">
 				</div>
 			</div>
-		</div>
+		</div>  <div class="row">
+			<div class="col-4">
+			 <div class="form-group">
+                    <label for="exampleInputFile">Upload Photo</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                      </div>
+                    </div>
+                  </div>
+				  </div>
+                  </div>
 		<!-- /.card-body -->
 		<div class="card-footer">
 			<button type="submit" class="btn btn-primary">Submit</button>
@@ -233,5 +238,13 @@
 <!-- Footer -->
 @include('footer')
 
+ <script type="text/javascript">
+        $(function() {              
+           // Bootstrap DateTimePicker v4
+           $('.dateformat').datetimepicker({
+                 format: 'DD-MM-YYYY'
+           });
+        });      
+    </script>
 </body>
 </html>

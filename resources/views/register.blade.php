@@ -28,9 +28,9 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-       <form action="{{url('create')}}" method="POST" id="logForm">
+       <form action="{{url('create', app()->getLocale()))}}" method="POST" id="logForm">
 										{{ csrf_field() }}
-      <div class="form-group">
+           <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="surname" id="surname" placeholder="Enter Surname">
                    <!-- <input type="text" class="form-control" id="firstname" placeholder="Enter First Name">

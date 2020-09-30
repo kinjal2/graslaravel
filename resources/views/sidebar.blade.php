@@ -34,8 +34,18 @@
               </p>
             </a>
           </li>
-        </ul>
-		
+          
+          <li class="nav-item">
+            <a href="{{url('gras/useropration')}}" class="nav-link ">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               User Oprations
+               
+              </p>
+            </a>
+          </li>
+       </ul>
+      
       </nav>
       <!-- /.sidebar-menu -->
     </div>
