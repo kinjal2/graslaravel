@@ -18,6 +18,7 @@ class HomeController extends Controller
     {  
         $uid=Session::get('uid');
         $usermaster = Register::find($uid);
+        Session::put('basic_pay',$usermaster->basic_pay);
         if($usermaster->basic_pay==''){
             $where= array('id'=>$usermaster->is_dept_head);
             $data = getYesNo('is_dept_head',$where);
@@ -26,8 +27,10 @@ class HomeController extends Controller
         else{  
             $quarterlist = Quarter::all(); 
             $notification= Notification::where('uid', '=',  $uid)->get();
-            $quarterselect= Quarter::where('bpay_from', '<=',$usermaster->basic_pay)->where('bpay_to', '>=',$usermaster->basic_pay)->first();
-       //   dd($quarterselect->quartertype);
+            $basic_pay=Session::get('basic_pay');
+            $quarterselect= Quarter::where('bpay_from', '<=',$basic_pay)->where('bpay_to', '>=',$basic_pay)->first();
+      
+         
             return view('dashborad', compact('quarterlist','notification','quarterselect') );
         }
 	  
@@ -111,9 +114,9 @@ class HomeController extends Controller
 				return redirect('insert')->with('failed',"operation failed");
 			}
         }
-     
-
-
+    }
+    public function requestdetails(){
+       return view('front_annexurea');
     }
     public function getData(request $request){
         if ($request->ajax()) {

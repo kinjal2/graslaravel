@@ -4,30 +4,31 @@
     @include('sidebar')
     <style type="text/css">
     .success{
-        background: {{ URL::asset('public/images/success.png') }} no-repeat scroll 0 2px #DEF9D1 !important;
+        background: {{ URL::asset('images/success.png') }} no-repeat scroll 0 2px #DEF9D1 !important;
         color: #409300;
         font-weight: bold;
     }
     .notification{
-        background: {{ URL::asset('public/images/notify.png') }} no-repeat scroll 0 2px #F9F3D9;
+        background: {{ URL::asset('/images/notify.png') }} no-repeat scroll 0 2px #F9F3D9;
         font-weight: bold;
         color: #9B7203;
     }
     .notify-list li{margin-top:5px;}
     .notification-success {
-    background: {{ URL::asset('public/images/tick.gif') }}  no-repeat scroll 14px 8px #E1F7E8;
+    background: URL("/images/success.png") no-repeat scroll 0 2px #DEF9D1 !important ;
     border: 1px solid;
     color: green;
     font-weight: bold;
     padding: 5px 0 5px 45px;
-}
-.notification-fail {
-    background:{{ URL::asset('public/images/notify.png') }} no-repeat scroll 14px 8px #f9f9b3;
+    }
+    .notification-fail {
+    background: URL("/images/notify.png") no-repeat scroll 14px 8px #f9f9b3;
     border: 1px solid;
     color: brown;
     font-weight: bold;
     padding: 5px 0 5px 45px;
 }
+
 
     
 </style>
@@ -78,7 +79,7 @@
                     </tr>
                    </thead>
                   <tbody>
-                   @foreach($quarterlist as $q)
+                   @foreach($quarterlist as $q) 
                  <tr style="{{ $quarterselect->quartertype==$q->quartertype ? 'background-color:#DEF9D1;font-weight:bold;' :'' }}"> 
                     <td> {{ $q->quartertype }}</td>
                     <td> {{ $q->bpay_from }}</td>
