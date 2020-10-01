@@ -27,7 +27,7 @@
        
       <div class="col-md-12">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card-default">
               <div class="card-header">
                 <h3 class="card-title">Request Details</h3>
 				@if ($errors->any())
@@ -64,42 +64,89 @@
 				</div>
 			</div>
 		
-		</div>
-		<div class="row">
+		</div> 
+	<div class="row">
         <div class="col-6"> 
 		<label for="designation">{{  __('message.cometransfer') }} </label>
 		<div class="form-group clearfix">
-                      <div class="icheck-primary d-inline">
-                        <input type="radio" id="deputationy" name="deputation_yn" checked>
+                      <div class="icheck-primary d-inline ">
+                        <input type="radio" id="deputationy" name="deputation_yn" value="Y" checked>
                         <label for="deputationy">YES
                         </label>
                       </div>
-                      <div class="icheck-primary d-inline">
-                        <input type="radio" id="deputationn" name="deputation_yn">
+                      <div class="icheck-primary d-inline ">
+                        <input type="radio" id="deputationn" name="deputation_yn" value="N">
                         <label for="deputationn">NO
                         </label>
                       </div>
                     </div>
 			</div>
-			<div class="col-6">
+		<div class="col-2 deputation">
+				<div class="form-group">
+				<label for="old_desg">{{  __('message.designation') }}</label>
+				<input type="text" class="form-control" value="{{isset($users->office_address)?$users->office_address:''}}"  id="old_desg" name="old_desg" placeholder="Enter old designation">
+				</div>
+				</div>
+        <div class="col-4 deputation">
+				<div class="form-group">
+				<label for="old_desg">{{  __('message.office') }}</label>
+				<input type="text" class="form-control" value="{{isset($users->old_office)?$users->old_office:''}}"  id="old_office" name="old_office" placeholder="Enter old Office">
+				</div>
+		</div> 
+		</div>
+		</div>
+		   <div class="row">
+			<div class="col-5">
 				<div class="form-group">
 				<label for="Office">{{  __('message.beforerecidant') }}</label>
 				<div class="form-group clearfix">
                       <div class="icheck-primary d-inline">
-                        <input type="radio" id="radioPrimary1" name="r1" checked>
-                        <label for="radioPrimary1">YES
+                        <input type="radio" id="old_allocation_y" name="old_allocation_yn" 	value="Y">
+                        <label for="old_allocation_y">YES
                         </label>
                       </div>
                       <div class="icheck-primary d-inline">
-                        <input type="radio" id="radioPrimary2" name="r1">
-                        <label for="radioPrimary2">NO
+                        <input type="radio" id="old_allocation_n" name="old_allocation_yn" value="Y">
+                        <label for="old_allocation_n">NO
                         </label>
                       </div>
                     </div>	</div>
 			</div>
+			<div class="col-2 deputation">
+				<div class="form-group">
+				<label for="old_desg">વસવાટ ની કેટેગરી</label>
+				<input type="text" class="form-control" value="{{isset($users->office_address)?$users->office_address:''}}"  id="old_desg" name="old_desg" placeholder="Enter old designation">
+				</div>
+				</div>
+        <div class="col-5 deputation">
+				<div class="form-group">
+				<label for="old_desg">	કોલોની નું નામ/રીક્વીઝીશન કરેલ મકાન ની વિગત</label>
+				<input type="text" class="form-control" value="{{isset($users->old_office)?$users->old_office:''}}"  id="prv_area_name" name="prv_area_name" placeholder="Enter previous  Area ">
+				</div>
+		</div> 
+	
+	</div>
+	<div class="row">
+        <div class="col-4 deputation">
+				<div class="form-group">
+				<label for="old_desg">		વસવાટ નો ક્વાર્ટર નંબર</label>
+				<input type="text" class="form-control" value="{{isset($users->old_office)?$users->old_office:''}}"  id="prv_building_no" name="prv_building_no" placeholder="Enter previous  Area ">
+				</div>
+		</div> 
+		<div class="col-5 deputation">
+				<div class="form-group">
+				<label for="old_desg">	માસીક ભાડું</label>
+				<input type="text" class="form-control" value="{{isset($users->old_office)?$users->old_office:''}}"  id="prv_rent" name="prv_rent" placeholder="Enter previous  Area ">
+				</div>
+		</div> 
+		<div class="col-5 deputation">
+				<div class="form-group">
+				<label for="old_desg">	મકાન મળતાં ઉપર દર્શાવેલ મકાન સરકારને તુરત પાછું આપવામાં આવશે કે કેમ?</label>
+				<input type="text" class="form-control" value="{{isset($users->old_office)?$users->old_office:''}}"  id="prv_handover" name="prv_handover" placeholder="Enter previous  Area ">
+				</div>
+		</div> 
 			
-		</div>
-		
+			</div>
 		<div class="row">
         <div class="col-6">
 				<div class="form-group">
@@ -117,6 +164,14 @@
                       </div>
                     </div>	</div>
 			</div>
+			<div class="col-5 deputation">
+				<div class="form-group">
+				<label for="old_desg">	વિગત:</label>
+				<textarea class="form-control"  id="old_quarter_details" name="old_quarter_details"></textarea>
+				</div>
+		</div> 
+	
+			
 			<div class="col-6">
 				<div class="form-group">
 				<label for="grade_pay">{{  __('message.lives') }}</label>
@@ -230,12 +285,23 @@
 @include('footer')
 
  <script type="text/javascript">
-        $(function() {              
+$(function() {              
            // Bootstrap DateTimePicker v4
            $('.dateformat').datetimepicker({
                  format: 'DD-MM-YYYY'
            });
-        });      
+ });  
+$(document).ready(function() {
+	
+$('input[name=deputation_yn][type=radio]').change(function() { 
+    if (this.value == 'Y') {
+        $('.deputation').show();
+    }
+    else if (this.value == 'N') {
+         $('.deputation').hide();
+    }
+}); 
+}); 
     </script>
 </body>
 </html>

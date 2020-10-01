@@ -9,7 +9,7 @@ class Login extends Model
     //
     use Notifiable;
 
-    protected $guard = 'admin';
+    //protected $guard = 'login';
     protected $table = 'userschema.login';
     protected $primaryKey = 'loginid';
 
