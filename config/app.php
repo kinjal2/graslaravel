@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         
 
         /*
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
 
     ],
 

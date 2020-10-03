@@ -15,5 +15,15 @@ return [
     'iftranser' => 'મારી બદલી થાય તો તે અંગે ની જાણ તુરત કરીશ ', 
     'designation'=>'Designation',
     'office'=>'Office',
+    'prv_quarter_type'=>'વસવાટની કક્ષા',
+    'prv_area'=>'સેકટર નં.',
+    'prv_blockno'=>'બ્લોક નં.',
+    'prv_unitno'=>'યુનિટ',
+    'prv_allotment_details'=>'કયા નંબર, તારીખના ફાળવણી આદેશથી ઉપરોકત વસવાટ ફાળવવામાં આવેલ હતું.',
+    'prv_possession_date'=>' કઇ તારીખથી સદર વસવાટનો ઉપભોગ કરો છો ? (કબજો લીધા તારીખ)',
+
+    'prv_area'=>'સેકટર નં.',
+    'prv_area'=>'સેકટર નં.',
+
 
 ];

@@ -49,7 +49,7 @@
 			<div class="col-6">
 				<div class="form-group">
 				<label for="quartertype">{{  __('message.quarter_cate') }}</label> 
-        {{ Form::select('quartertype',getBasicPay(),'',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+        {{ Form::select('quartertype',getBasicPay(),'',['id'=>'quartertype','class'=>'form-control select2']) }}                                       
 				</div>
 			</div>
 			<div class="col-6">

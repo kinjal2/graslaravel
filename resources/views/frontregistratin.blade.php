@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>General Form</h1>
+            <h1>User Profile</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">General Form</li>
+              <li class="breadcrumb-item active">User Profile</li>
             </ol>
           </div>
         </div>
@@ -24,12 +24,11 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       
       <div class="col-md-12">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card ">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">User Details</h3>
 				@if ($errors->any())
 					<div class="alert alert-danger">
 						<ul>
@@ -42,7 +41,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-			  <form method="POST" action="{{ url('profiledetails, app()->getLocale())') }}" enctype="multipart/form-data">
+			  <form method="POST" action="{{ url('profiledetails') }}" enctype="multipart/form-data">
 @csrf
 	<div class="card-body">
 		<div class="row">
@@ -61,21 +60,22 @@
 				<div class="form-group">
 				<label for="Birth Date">Birth Date</label>
 				<div class="input-group date dateformat" id="date_of_birth" data-target-input="nearest">
-                        <input type="text" value="{{isset($users->date_of_birth)?$users->date_of_birth:''}}" name="date_of_birth" class="form-control datetimepicker-input " data-target="#date_of_birth" readonly/>
+                        <input type="text" value="{{isset($users->date_of_birth)?date('d-m-Y',strtotime($users->date_of_birth)):''}}" name="date_of_birth" class="form-control datetimepicker-input " data-target="#date_of_birth" readonly/>
                         <div class="input-group-append" data-target="#date_of_birth" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
                     </div>	
 				</div>
 			</div>
-			<div class="col-4">
+		
+		</div>
+		<div class="row">
+		<div class="col-4">
 				<div class="form-group">
 				<label for="designation">Designation</label>
 				<input type="text" value="{{isset($users->designation)?$users->designation:''}}" class="form-control" id="designation" name="designation" placeholder="Designation">
 				</div>
 			</div>
-		</div>
-		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Office">Office</label>
@@ -83,6 +83,13 @@
 				</div>
 			</div>
 			<div class="col-4">
+				<div class="form-group">
+				<img src="<?php echo asset("public/uploads/$users->image")?>"></img>
+				</div>
+			</div>
+			</div>
+		<div class="row">
+		<div class="col-4">
 				<div class="form-group">
 				<label for="Mobile No">Mobile No</label>
 				<input type="text"  value="{{isset($users->contact_no)?$users->contact_no:''}}"  class="form-control" id="contact_no" name="contact_no" placeholder="Moblie No">
@@ -94,25 +101,39 @@
 				<input type="email" value="{{isset($users->email_id)?$users->email_id:''}}"  class="form-control"  name="email_id" id="email_id" placeholder="email">
 				</div>
 			</div>
+			<div class="col-4">
+			 <div class="form-group">
+                    <label for="exampleInputFile">Upload Photo</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                      </div>
+                    </div>
+                  </div>
+				  </div>
 		</div>
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
 				<label for="maratial_status">Maratial Status</label>
-				{{ Form::select('maratial_status',getMaratialstatus(),'isset($users->maratial_status)?$users->maratial_status:" "',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+				{{ Form::select('maratial_status',getMaratialstatus(),($users->maratial_status)?$users->maratial_status:'' ,['id'=>'maratial_status','class'=>'form-control select2']) }}                                       
 			
 				 </div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="is_dept_head">Is Head of The Department ?</label>
-				{{ Form::select('is_dept_head',getYesNo(),'isset($users->is_dept_head)?$users->is_dept_head:" "',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+				{{ Form::select('is_dept_head',getYesNo(),($users->is_dept_head)?$users->is_dept_head:'',['id'=>'is_dept_head','class'=>'form-control select2']) }}                                       
 			</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group"> 
 				<label for="is_transferable">Is Transferable Job ?</label> 
-		    	{{ Form::select('is_transferable',getYesNo(),'isset($users->is_transferable)?$users->is_transferable:" "',['id'=>'eamil','class'=>'form-control select2']) }}                                       
+		    	{{ Form::select('is_transferable',getYesNo(),($users->is_transferable)?$users->is_transferable:'',['id'=>'is_transferable','class'=>'form-control select2']) }}                                       
 				</div>	</div>
 		</div>
 		<div class="row">
@@ -120,7 +141,7 @@
 				<div class="form-group">
 				<label for="appointment_date">Original Date of Appointment in Govt</label>
 				<div class="input-group date dateformat" id="appointment_date" data-target-input="nearest">
-                        <input type="text" value="{{isset($users->appointment_date)?$users->appointment_date:''}}" name="appointment_date"  class="form-control datetimepicker-input" data-target="#appointment_date"/>
+                        <input type="text" value="{{ ($users->appointment_date)?date('d-m-Y',strtotime($users->appointment_date)):''}}" name="appointment_date"  class="form-control datetimepicker-input" data-target="#appointment_date"/>
                         <div class="input-group-append" data-target="#appointment_date" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -131,7 +152,7 @@
 				<div class="form-group">
 				<label for="date_of_retirement">Retirement Date</label>
 				<div class="input-group date dateformat" id="date_of_retirement" data-target-input="nearest">
-                        <input type="text" value="{{isset($users->date_of_retirement)?$users->date_of_retirement:''}}" name="date_of_retirement"  class="form-control datetimepicker-input" data-target="#date_of_retirement"/>
+                        <input type="text" value="{{isset($users->date_of_retirement)?date('d-m-Y',strtotime($users->date_of_retirement)):''}}" name="date_of_retirement"  class="form-control datetimepicker-input" data-target="#date_of_retirement"/>
                         <div class="input-group-append" data-target="#date_of_retirement" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -169,14 +190,15 @@
 			<div class="col-4">
 				<div class="form-group">
 				<label for="Address">Native Address</label>
-				<input type="text" class="form-control" value="{{isset($users->address)?$users->address:''}}"  id="address" name="address" placeholder="Enter address">
+				<textarea class="form-control" id="address" name="address" placeholder="Enter address">{{ isset($users->address)?$users->address:''}}</textarea>
+				
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
 				<label for="current_address">Current Address</label>
-				<input type="text" class="form-control"  value="{{isset($users->current_address)?$users->current_address:''}}" id="current_address" name="current_address" placeholder="Enter Current address">
-				</div>
+				<textarea class="form-control" id="current_address" name="current_address" placeholder="Enter Current Address">{{ isset($users->current_address)?$users->current_address:''}}</textarea>
+			</div>
 			</div>
 			<div class="col-4">
 				<div class="form-group">
@@ -204,22 +226,7 @@
 				<input type="text" class="form-control" value="{{isset($users->pancard)?$users->pancard:''}}" id="pancard" name="pancard"placeholder="enter pan no">
 				</div>
 			</div>
-		</div>  <div class="row">
-			<div class="col-4">
-			 <div class="form-group">
-                    <label for="exampleInputFile">Upload Photo</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image" name="image">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
-                    </div>
-                  </div>
-				  </div>
-                  </div>
+		</div>  
 		<!-- /.card-body -->
 		<div class="card-footer">
 			<button type="submit" class="btn btn-primary">Submit</button>

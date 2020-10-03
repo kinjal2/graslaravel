@@ -29,11 +29,12 @@ Route::post('create', 'AuthController@create');
 Route::get('home', 'HomeController@index'); 
 Route::post('reset_password_without_token', 'AuthController@validatePasswordRequest');
 Route::get('forgotpassword', 'AuthController@forgotpassword');
-
+Route::get('profile', 'HomeController@profile'); 
 
 
 Route::post('/profiledetails', 'HomeController@updateprofiledetails');
 Route::get('/gras/useropration', 'HomeController@requestdetails');
+Route::get('/gras/highercategory', 'Requestquarter@requesthighercategory');
 
 //Route::get('/quarter-list', 'HomeController@getData');
 //Route::get('homedata', [
